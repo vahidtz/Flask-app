@@ -1,4 +1,5 @@
 # Restful libraru will be used. no longer you will need to use app.route()
+import os
 from flask import Flask, jsonify
 from flask_restful import Api # reqparse is a package itself, used to control payload coming form client
 from flask_jwt import JWT
@@ -9,7 +10,7 @@ from resources.item import ItemResource, ItemlistResource
 from resources.store import StoreResource, StorelistResource
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'Jose'
 api = Api(app)
